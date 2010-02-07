@@ -3,7 +3,7 @@
 ;; Copyright 2006 Ye Wenbin
 ;;
 ;; Author: wenbinye@163.com
-;; Version: $Id: mysql.el,v 1.1 2006/08/24 02:34:31 ywb Exp ywb $
+;; Version: $Id: mysql.el,v 1.1.1 2006/08/24 02:34:31 ywb Exp ywb $
 ;; Keywords:
 ;; X-URL: not distributed yet
 
@@ -51,6 +51,7 @@
 (defvar mysql-proc-list nil)
 (defvar mysql-process nil)
 
+;;;###autoload
 (defun mysql-connect (&optional user pwd db)
   (let ((args (remove-if 'null
                          (append mysql-options
@@ -102,6 +103,7 @@
       (process-send-string proc sql)
     (error "Process is not run")))
 
+;;;###autoload
 (defun mysql-query (sql proc)
   "Query util get result. But if the time which mysql takes to process
 the SQL longer than 0.5 sec, you will get no result.
@@ -151,6 +153,7 @@ process output"
     (setq mysql-timer nil)))
 
 ;;; query with shell command
+;;;###autoload
 (defun mysql-shell-query (sql &optional db)
   (let ((cmd (mapconcat
               'identity
