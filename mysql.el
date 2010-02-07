@@ -4,7 +4,7 @@
 ;;
 ;; Author: wenbinye@163.com
 ;; Version: $Id: mysql.el,v 1.1 2006/08/24 02:34:31 ywb Exp ywb $
-;; Keywords: 
+;; Keywords:
 ;; X-URL: not distributed yet
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -130,7 +130,7 @@ process output"
 
 (defun mysql-query-timer ()
   (dolist (proc mysql-proc-list)
-    (let ((mysql-process proc)) ; install a global variable for after-query function    
+    (let ((mysql-process proc)) ; install a global variable for after-query function
       (if (mysql-finished proc)
           (progn
             (setq mysql-proc-list
@@ -139,7 +139,7 @@ process output"
                 (funcall (process-get proc 'after-query))
               (process-put proc 'after-query nil)))
         (process-put proc 'elapse-time
-                     (+ (mysql-elapse-time proc) mysql-intrival)))      
+                     (+ (mysql-elapse-time proc) mysql-intrival)))
       (unless (< (mysql-elapse-time proc) mysql-timeout)
         (if (yes-or-no-p "Query exceed timeout, Do you want to continue")
             (process-put proc 'elapse-time 0)
